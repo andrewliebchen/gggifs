@@ -1,22 +1,24 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import Giphy from 'giphy-api';
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+const giphy = Giphy('dc6zaTOxFJmzC');
+
+Template.results.onCreated(function getGifs() {
+  this.gif = new ReactiveVar();
+  // This has to be on the server
+  giphy.search('cat', (err, res) => {
+    if(res) {
+      Template.instance().gif.set(res);
+    } else {
+      console.log(err);
+    }
+  });
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+Template.results.helpers({
+  result() {
+    return Template.instance().gif.get();
   },
 });
