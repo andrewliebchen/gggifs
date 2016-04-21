@@ -7,8 +7,11 @@
 </body>
 
 <template name="gifs">
-  <input type="search" class="mtr-gif-search"/>
-  <button class="mtr-get-gifs">Get gifs</button>
+  <header>
+    <input type="search" class="mtr-gif-search"/>
+    <button class="mtr-get-gifs">Get gifs</button>
+  </header>
+
   <ul>
     {{ #each result in results }}
       <li>

@@ -10,6 +10,7 @@ Template.gifs.onCreated(function getGifs() {
 Template.gifs.helpers({
   results() {
     let gifs = Template.instance().gif.get();
+
     if(gifs) {
       return Template.instance().gif.get().data;
     }
@@ -19,11 +20,13 @@ Template.gifs.helpers({
 Template.gifs.events({
   'click .mtr-get-gifs'(event, instance) {
     const keyword = instance.$('.mtr-gif-search').val();
-    console.log(keyword);
+
     Meteor.call('getGifs', keyword, (err, res) => {
       if(res){
         console.log(res);
         instance.gif.set(res);
+      } else {
+        console.warn(err);
       }
     });
   }

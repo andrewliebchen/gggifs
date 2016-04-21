@@ -6,7 +6,7 @@ const giphy = Giphy('dc6zaTOxFJmzC');
 Meteor.methods({
   getGifs(keyword) {
     return giphy.search(keyword).then((res) => {
-      console.log(`Got results for ${keyword}`);
+      console.log(`Got results for ${keyword}!`);
       return res;
     });
   }
