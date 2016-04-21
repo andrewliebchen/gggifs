@@ -7,6 +7,7 @@
 </body>
 
 <template name="gifs">
+  {{> loginButtons }}
   <header>
     <input type="search" class="mtr-gif-search"/>
     <button class="mtr-get-gifs">Get gifs</button>
@@ -14,9 +15,14 @@
 
   <ul>
     {{ #each result in results }}
-      <li>
-        <img src="{{ result.images.downsized.url }}"/>
-      </li>
+      {{> gif url=result.images.downsized.url id=result.id }}
     {{ /each }}
   </ul>
+</template>
+
+<template name="gif">
+  <li>
+    <img src="{{ url }}"/>
+    <button class="mtr-add-gif">Add</button>
+  </li>
 </template>

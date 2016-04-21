@@ -29,5 +29,12 @@ Template.gifs.events({
         console.warn(err);
       }
     });
+  },
+
+  'click .mtr-add-gif'(event, instance) {
+    Meteor.call('addGif', {
+      gifId: this.id,
+      userId: Meteor.userId()
+    });
   }
 });

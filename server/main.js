@@ -9,5 +9,13 @@ Meteor.methods({
       console.log(`Got results for ${keyword}!`);
       return res;
     });
+  },
+
+  addGif(args) {
+    return Meteor.users.update(args.userId, {
+      $push: {
+        'profile.gifs': args.gifId
+      }
+    });
   }
 });
