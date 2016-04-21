@@ -7,6 +7,13 @@
 </body>
 
 <template name="gifs">
-  <button class="get-gifs">Get cats</button>
-  {{ result }}
+  <input type="search" class="mtr-gif-search"/>
+  <button class="mtr-get-gifs">Get gifs</button>
+  <ul>
+    {{ #each result in results }}
+      <li>
+        <img src="{{ result.images.downsized.url }}"/>
+      </li>
+    {{ /each }}
+  </ul>
 </template>

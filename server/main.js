@@ -4,9 +4,9 @@ import Giphy from 'giphy-api';
 const giphy = Giphy('dc6zaTOxFJmzC');
 
 Meteor.methods({
-  getGifs() {
-    return giphy.search('cat').then((res) => {
-      console.log('Got it!');
+  getGifs(keyword) {
+    return giphy.search(keyword).then((res) => {
+      console.log(`Got results for ${keyword}`);
       return res;
     });
   }

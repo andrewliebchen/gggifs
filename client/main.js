@@ -8,15 +8,19 @@ Template.gifs.onCreated(function getGifs() {
 });
 
 Template.gifs.helpers({
-  result() {
-    return Template.instance().gif.get();
+  results() {
+    let gifs = Template.instance().gif.get();
+    if(gifs) {
+      return Template.instance().gif.get().data;
+    }
   }
 });
 
 Template.gifs.events({
-  'click .get-gifs'(event, instance) {
-    console.log('click');
-    Meteor.call('getGifs', (err, res) => {
+  'click .mtr-get-gifs'(event, instance) {
+    const keyword = instance.$('.mtr-gif-search').val();
+    console.log(keyword);
+    Meteor.call('getGifs', keyword, (err, res) => {
       if(res){
         console.log(res);
         instance.gif.set(res);
