@@ -5,10 +5,9 @@ const giphy = Giphy('dc6zaTOxFJmzC');
 
 Meteor.methods({
   getGifs() {
-    giphy.search('cat', (err, res) => {
-      if(res) {
-        return res;
-      }
+    return giphy.search('cat').then((res) => {
+      console.log('Got it!');
+      return res;
     });
   }
 });

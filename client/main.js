@@ -13,10 +13,12 @@ Template.gifs.helpers({
   }
 });
 
-Template.gifs.helpers({
+Template.gifs.events({
   'click .get-gifs'(event, instance) {
+    console.log('click');
     Meteor.call('getGifs', (err, res) => {
       if(res){
+        console.log(res);
         instance.gif.set(res);
       }
     });
