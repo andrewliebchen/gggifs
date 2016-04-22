@@ -23,17 +23,20 @@ Template.gifs.helpers({
 });
 
 Template.gifs.events({
-  'click .mtr-get-gifs'(event, instance) {
-    const keyword = instance.$('.mtr-gif-search').val();
-    Meteor.call('getGifsByKeyword', keyword, (err, res) => {
-      if(res){
-        console.log(res);
-        instance.resultsTitle.set(`Gifs matching "${keyword}"`);
-        instance.resultsGifs.set(res);
-      } else {
-        console.warn(err);
-      }
-    });
+  'keypress .mtr-gif-search'(event, instance) {
+    const keyword = event.target.value;
+    if(event.which === 13) {
+      Meteor.call('getGifsByKeyword', keyword, (err, res) => {
+        if(res){
+          console.log(res);
+          instance.resultsTitle.set(`Gifs matching "${keyword}"`);
+          instance.resultsGifs.set(res);
+          event.target.value = '';
+        } else {
+          console.warn(err);
+        }
+      });
+    }
   },
 
   'click .mtr-get-user-gifs'(event, instance) {
