@@ -8,21 +8,24 @@
 
 <template name="gifs">
   {{> loginButtons }}
+  <button class="mtr-get-user-gifs">My gifs</button>
   <header>
     <input type="search" class="mtr-gif-search"/>
     <button class="mtr-get-gifs">Get gifs</button>
   </header>
 
-  <ul>
+  <h2>{{ resultsTitle }}</h2>
+  <div>
     {{ #each result in results }}
       {{> gif url=result.images.downsized.url id=result.id }}
     {{ /each }}
-  </ul>
+  </div>
 </template>
 
 <template name="gif">
-  <li>
+  <div>
     <img src="{{ url }}"/>
     <button class="mtr-add-gif">Add</button>
-  </li>
+    <button class="mtr-remove-gif">Remove</button>
+  </div>
 </template>

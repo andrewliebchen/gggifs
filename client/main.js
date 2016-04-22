@@ -4,15 +4,20 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 Template.gifs.onCreated(function getGifs() {
-  this.gif = new ReactiveVar();
+  this.resultsTitle = new ReactiveVar();
+  this.resultsGifs = new ReactiveVar();
 });
 
 Template.gifs.helpers({
+  resultsTitle() {
+    return Template.instance().resultsTitle.get();
+  },
+
   results() {
-    let gifs = Template.instance().gif.get();
+    let gifs = Template.instance().resultsGifs.get();
 
     if(gifs) {
-      return Template.instance().gif.get().data;
+      return Template.instance().resultsGifs.get().data;
     }
   }
 });
@@ -20,11 +25,22 @@ Template.gifs.helpers({
 Template.gifs.events({
   'click .mtr-get-gifs'(event, instance) {
     const keyword = instance.$('.mtr-gif-search').val();
-
-    Meteor.call('getGifs', keyword, (err, res) => {
+    Meteor.call('getGifsByKeyword', keyword, (err, res) => {
       if(res){
         console.log(res);
-        instance.gif.set(res);
+        instance.resultsTitle.set(`Gifs matching "${keyword}"`);
+        instance.resultsGifs.set(res);
+      } else {
+        console.warn(err);
+      }
+    });
+  },
+
+  'click .mtr-get-user-gifs'(event, instance) {
+    Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
+      if(res) {
+        instance.resultsTitle.set('Your gifs');
+        instance.resultsGifs.set(res);
       } else {
         console.warn(err);
       }
@@ -35,6 +51,24 @@ Template.gifs.events({
     Meteor.call('addGif', {
       gifId: this.id,
       userId: Meteor.userId()
+    });
+  },
+
+  'click .mtr-remove-gif'(event, instance) {
+    Meteor.call('removeGif', {
+      gifId: this.id,
+      userId: Meteor.userId()
+    }, (err, res) => {
+      if(res) {
+        // Get the user collection again
+        Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
+          if(res) {
+            instance.resultsGifs.set(res);
+          } else {
+            console.warn(err);
+          }
+        });
+      }
     });
   }
 });
