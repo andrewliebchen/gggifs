@@ -1,5 +1,5 @@
 {
-  "name": "gggif",
+  "name": "gggifs",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -13,7 +13,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "giphy": "0.0.4",
-    "giphy-api": "^1.1.15"
+    "giphy-api": "^1.1.15",
+    "slackbots": "^0.5.1"
   }
 }
