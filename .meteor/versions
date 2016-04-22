@@ -1,8 +1,8 @@
 accounts-base@1.2.4
 accounts-oauth@1.1.10
-accounts-twitter@1.0.7
 accounts-ui@1.1.7
 accounts-ui-unstyled@1.1.10
+acemtp:accounts-slack@1.0.9
 allow-deny@1.0.2
 autopublish@1.0.5
 autoupdate@1.2.6
@@ -56,7 +56,7 @@ mongo@1.1.5
 mongo-id@1.0.2
 npm-mongo@1.4.41
 oauth@1.1.8
-oauth1@1.1.7
+oauth2@1.1.7
 observe-sequence@1.0.9
 ordered-dict@1.0.5
 promise@0.6.5
@@ -76,7 +76,6 @@ standard-minifier-js@1.0.4
 templating@1.1.7
 templating-tools@1.0.2
 tracker@1.0.11
-twitter@1.1.7
 ui@1.0.9
 underscore@1.0.6
 url@1.0.7
