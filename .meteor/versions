@@ -30,6 +30,7 @@ ecmascript-runtime@0.2.8
 ejson@1.0.9
 es5-shim@4.5.8
 fastclick@1.0.9
+fourseven:scss@3.4.3
 geojson-utils@1.0.6
 hot-code-push@1.0.2
 html-tools@1.0.7
@@ -54,6 +55,7 @@ modules@0.5.1
 modules-runtime@0.6.1
 mongo@1.1.5
 mongo-id@1.0.2
+mrt:normalize.css@2.0.1
 npm-mongo@1.4.41
 oauth@1.1.8
 oauth2@1.1.7

@@ -1,25 +1,36 @@
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+
 import './main.html';
 
-Template.gifs.onCreated(function getGifs() {
-  this.resultsTitle = new ReactiveVar();
-  this.resultsGifs = new ReactiveVar();
-});
+Session.setDefault('results', null);
 
 Template.gifs.helpers({
   resultsTitle() {
-    return Template.instance().resultsTitle.get();
+    let results = Session.get('results');
+    return results ? results.title : false;
   },
 
   results() {
-    let gifs = Template.instance().resultsGifs.get();
-
-    if(gifs) {
-      return Template.instance().resultsGifs.get().data;
-    }
+    let results = Session.get('results');
+    return results ? results.gifs.data : false;
   }
+});
+
+Template.header.events({
+  'click .mtr-get-user-gifs'(event, instance) {
+    Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
+      if(res) {
+        Session.set('results', {
+          title: 'Your gifs',
+          gifs: res
+        });
+      } else {
+        Meteor.Error(err);
+      }
+    });
+  },
 });
 
 Template.gifs.events({
@@ -29,25 +40,16 @@ Template.gifs.events({
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
           console.log(res);
-          instance.resultsTitle.set(`Gifs matching "${keyword}"`);
-          instance.resultsGifs.set(res);
+          Session.set('results', {
+            title: `Gifs matching "${keyword}"`,
+            gifs: res
+          });
           event.target.value = '';
         } else {
-          console.warn(err);
+          Meteor.Error(err);
         }
       });
     }
-  },
-
-  'click .mtr-get-user-gifs'(event, instance) {
-    Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
-      if(res) {
-        instance.resultsTitle.set('Your gifs');
-        instance.resultsGifs.set(res);
-      } else {
-        console.warn(err);
-      }
-    });
   },
 
   'click .mtr-add-gif'(event, instance) {
@@ -66,9 +68,12 @@ Template.gifs.events({
         // Get the user collection again
         Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
           if(res) {
-            instance.resultsGifs.set(res);
+            Session.set('results', {
+              title: 'Your gifs',
+              gifs: res
+            });
           } else {
-            console.warn(err);
+            Meteor.Error(err);
           }
         });
       }

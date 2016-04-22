@@ -3,28 +3,39 @@
 </head>
 
 <body>
-  {{> gifs}}
+  {{> header }}
+  {{> gifs }}
 </body>
 
-<template name="gifs">
-  {{> loginButtons }}
-  <button class="mtr-get-user-gifs">My gifs</button>
+<template name="header">
   <header>
-    <input type="search" class="mtr-gif-search"/>
+    {{> loginButtons }}
+    {{ #if currentUser}}
+      <button class="mtr-get-user-gifs">My gifs</button>
+    {{ /if }}
   </header>
+</template>
 
-  <h2>{{ resultsTitle }}</h2>
-  <div>
-    {{ #each result in results }}
-      {{> gif url=result.images.downsized.url id=result.id }}
-    {{ /each }}
+<template name="gifs">
+  <div class="gifs">
+    <input type="search" class="mtr-gif-search"/>
+    <h2>{{ resultsTitle }}</h2>
+    <div>
+      {{ #each result in results }}
+        {{> gif url=result.images.downsized.url id=result.id }}
+      {{ /each }}
+    </div>
   </div>
 </template>
 
 <template name="gif">
   <div>
     <img src="{{ url }}"/>
-    <button class="mtr-add-gif">Add</button>
-    <button class="mtr-remove-gif">Remove</button>
+    {{ #if currentUser}}
+      <button class="mtr-add-gif">Add</button>
+      <button class="mtr-remove-gif">Remove</button>
+    {{ else }}
+      Login to add gifs
+    {{ /if }}
   </div>
 </template>
