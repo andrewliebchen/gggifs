@@ -19,13 +19,16 @@ Meteor.methods({
   },
 
   addGif(args) {
-    return Meteor.users.update(args.userId, {
-      $push: {
-        'profile.gifs': {
-          id: args.gifId,
-          keywords: [args.keyword]
+    return giphy.id(args.gifId).then((res) => {
+      return Meteor.users.update(args.userId, {
+        $push: {
+          'profile.gifs': {
+            id: args.gifId,
+            keywords: [args.keyword],
+            data: res.data[0]
+          }
         }
-      }
+      });
     });
   },
 

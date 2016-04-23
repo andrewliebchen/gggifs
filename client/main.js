@@ -19,11 +19,20 @@ Template.gifs.helpers({
   }
 });
 
+
 Template.header.events({
   'click .mtr-get-user-gifs'(event, instance) {
     const gifIds = _.pluck(Meteor.user().profile.gifs, 'id');
+    const gifKeywords = _.pluck(Meteor.user().profile.gifs, 'keywords');
     Meteor.call('getGifsByIds', gifIds, (err, res) => {
+
       if(res) {
+        // Maybe this should be shoved into the User?
+        let gifCollection = [];
+        _.forEach(res.data, (gif, i) => {
+          gifCollection.push({data: gif, keywords: gifKeywords[i]})
+        });
+        console.log(gifCollection);
         Session.set('results', {
           title: 'Your gifs',
           gifs: res
@@ -41,7 +50,6 @@ Template.gifs.events({
     if(event.which === 13) {
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
-          console.log(res);
           Session.set('results', {
             title: `Gifs matching "${keyword}"`,
             gifs: res
@@ -54,7 +62,6 @@ Template.gifs.events({
   },
 
   'click .mtr-add-gif'(event, instance) {
-    debugger;
     Meteor.call('addGif', {
       gifId: this.id,
       keyword: instance.$('.mtr-gif-search').val(),
