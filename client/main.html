@@ -4,23 +4,25 @@
 
 <body>
   {{> header }}
-  {{> gifs }}
+  {{> search }}
+  {{> searchResults }}
   {{> userGifs}}
 </body>
 
 <template name="header">
   <header>
     {{> loginButtons }}
-    {{ #if currentUser}}
-      <button class="mtr-get-user-gifs">My gifs</button>
-    {{ /if }}
   </header>
 </template>
 
-<!-- search results list v. user list -->
-<template name="gifs">
-  <div class="gifs">
+<template name="search">
+  <header class="search">
     <input type="search" class="mtr-gif-search"/>
+  </header>
+</template>
+
+<template name="searchResults">
+  <div class="gifs">
     <h2>{{ resultsTitle }}</h2>
     <div>
       {{ #each result in results }}

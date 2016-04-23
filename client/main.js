@@ -6,44 +6,32 @@ import './main.html';
 
 Session.setDefault('results', null);
 
-Template.gifs.helpers({
+Template.searchResults.helpers({
   resultsTitle() {
     let results = Session.get('results');
-    return results ? results.title : false;
+    return results ? `Gifs matching ${results.title}` : false;
   },
 
   results() {
     let results = Session.get('results');
-    console.log(results);
     return results ? results.gifs.data : false;
   }
 });
 
 Template.userGifs.helpers({
   gifs() {
-    console.log(Meteor.user().profile.gifs);
     return Meteor.user().profile.gifs;
-  }
-})
-
-
-Template.header.events({
-  'click .mtr-get-user-gifs'(event, instance) {
-    Session.set('results', {
-      title: 'Your gifs',
-      gifs: Meteor.user().profile.gifs
-    });
   }
 });
 
-Template.gifs.events({
+Template.search.events({
   'keypress .mtr-gif-search'(event, instance) {
     const keyword = event.target.value;
     if(event.which === 13) {
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
           Session.set('results', {
-            title: `Gifs matching "${keyword}"`,
+            title: keyword,
             gifs: res
           });
         } else {
@@ -51,8 +39,10 @@ Template.gifs.events({
         }
       });
     }
-  },
+  }
+});
 
+Template.gifContent.events({
   'click .mtr-add-gif'(event, instance) {
     Meteor.call('addGif', {
       data: this.data,
