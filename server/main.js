@@ -12,6 +12,7 @@ Meteor.methods({
   },
 
   getGifsByIds(ids) {
+    // Don't really need this, but we can keep it around
     return giphy.id(ids).then((res) => {
       console.log('Got results!');
       return res;
@@ -19,20 +20,18 @@ Meteor.methods({
   },
 
   addGif(args) {
-    return giphy.id(args.gifId).then((res) => {
-      return Meteor.users.update(args.userId, {
-        $push: {
-          'profile.gifs': {
-            id: args.gifId,
-            keywords: [args.keyword],
-            data: res.data[0]
-          }
+    return Meteor.users.update(args.userId, {
+      $push: {
+        'profile.gifs': {
+          data: args.data,
+          keywords: [args.keyword]
         }
-      });
+      }
     });
   },
 
   removeGif(args) {
+    // FIXME: Does this work?
     return Meteor.users.update(args.userId, {
       $pull: {
         'profile.gifs': {

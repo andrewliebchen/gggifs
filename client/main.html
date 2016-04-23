@@ -5,6 +5,7 @@
 <body>
   {{> header }}
   {{> gifs }}
+  {{> userGifs}}
 </body>
 
 <template name="header">
@@ -16,13 +17,14 @@
   </header>
 </template>
 
+<!-- search results list v. user list -->
 <template name="gifs">
   <div class="gifs">
     <input type="search" class="mtr-gif-search"/>
     <h2>{{ resultsTitle }}</h2>
     <div>
       {{ #each result in results }}
-        {{> gif url=result.images.downsized.url id=result.id }}
+        {{> gif data=result }}
       {{ /each }}
     </div>
   </div>
@@ -30,12 +32,24 @@
 
 <template name="gif">
   <div>
-    <img src="{{ url }}"/>
+    <img src="{{ data.images.fixed_width.url }}"/>
     {{ #if currentUser}}
       <button class="mtr-add-gif">Add</button>
-      <button class="mtr-remove-gif">Remove</button>
     {{ else }}
       Login to add gifs
     {{ /if }}
+  </div>
+</template>
+
+<template name="userGifs">
+  <div class="gifs">
+    {{ #each gif in gifs }}
+      <div>
+        <img src="{{ gif.data.images.fixed_width.url }}"/>
+        {{ #each keyword in gif.keywords }}
+          {{ keyword }}
+        {{ /each }}
+      </div>
+    {{ /each }}
   </div>
 </template>
