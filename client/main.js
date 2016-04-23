@@ -14,13 +14,15 @@ Template.gifs.helpers({
 
   results() {
     let results = Session.get('results');
+    console.log(results);
     return results ? results.gifs.data : false;
   }
 });
 
 Template.header.events({
   'click .mtr-get-user-gifs'(event, instance) {
-    Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
+    const gifIds = _.pluck(Meteor.user().profile.gifs, 'id');
+    Meteor.call('getGifsByIds', gifIds, (err, res) => {
       if(res) {
         Session.set('results', {
           title: 'Your gifs',
@@ -44,7 +46,6 @@ Template.gifs.events({
             title: `Gifs matching "${keyword}"`,
             gifs: res
           });
-          event.target.value = '';
         } else {
           Meteor.Error(err);
         }
@@ -53,12 +54,15 @@ Template.gifs.events({
   },
 
   'click .mtr-add-gif'(event, instance) {
+    debugger;
     Meteor.call('addGif', {
       gifId: this.id,
+      keyword: instance.$('.mtr-gif-search').val(),
       userId: Meteor.userId()
     });
   },
 
+  // Fix this for new object array
   'click .mtr-remove-gif'(event, instance) {
     Meteor.call('removeGif', {
       gifId: this.id,

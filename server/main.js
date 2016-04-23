@@ -21,7 +21,10 @@ Meteor.methods({
   addGif(args) {
     return Meteor.users.update(args.userId, {
       $push: {
-        'profile.gifs': args.gifId
+        'profile.gifs': {
+          id: args.gifId,
+          keywords: [args.keyword]
+        }
       }
     });
   },
@@ -29,7 +32,11 @@ Meteor.methods({
   removeGif(args) {
     return Meteor.users.update(args.userId, {
       $pull: {
-        'profile.gifs': args.gifId
+        'profile.gifs': {
+          id: args.gifId
+        },
+        false,
+        true
       }
     });
   }
