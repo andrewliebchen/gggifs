@@ -62,7 +62,6 @@ Template.gifs.events({
     });
   },
 
-  // Fix this for new object array
   'click .mtr-remove-gif'(event, instance) {
     Meteor.call('removeGif', {
       gifId: this.id,
@@ -70,7 +69,8 @@ Template.gifs.events({
     }, (err, res) => {
       if(res) {
         // Get the user collection again
-        Meteor.call('getGifsByIds', Meteor.user().profile.gifs, (err, res) => {
+        const gifIds = _.pluck(Meteor.user().profile.gifs, 'id');
+        Meteor.call('getGifsByIds', gifIds, (err, res) => {
           if(res) {
             Session.set('results', {
               title: 'Your gifs',
