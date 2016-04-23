@@ -21,6 +21,7 @@ Template.gifs.helpers({
 
 Template.userGifs.helpers({
   gifs() {
+    console.log(Meteor.user().profile.gifs);
     return Meteor.user().profile.gifs;
   }
 })

@@ -24,20 +24,9 @@
     <h2>{{ resultsTitle }}</h2>
     <div>
       {{ #each result in results }}
-        {{> gif data=result }}
+        {{> gifContent data=result add=true }}
       {{ /each }}
     </div>
-  </div>
-</template>
-
-<template name="gif">
-  <div>
-    <img src="{{ data.images.fixed_width.url }}"/>
-    {{ #if currentUser}}
-      <button class="mtr-add-gif">Add</button>
-    {{ else }}
-      Login to add gifs
-    {{ /if }}
   </div>
 </template>
 
@@ -45,11 +34,26 @@
   <div class="gifs">
     {{ #each gif in gifs }}
       <div>
-        <img src="{{ gif.data.images.fixed_width.url }}"/>
+        {{> gifContent data=gif.data }}
         {{ #each keyword in gif.keywords }}
-          {{ keyword }}
+          <div class="keyword">{{ keyword }}</div>
         {{ /each }}
       </div>
     {{ /each }}
   </div>
+</template>
+
+<template name="gifContent">
+  <img src="{{ data.images.fixed_width.url }}"/>
+  <footer>
+    {{ #if currentUser}}
+      {{ #if add }}
+        <button class="mtr-add-gif">Add</button>
+      {{ else }}
+        <button class="mtr-remove-gif">Remove</button>
+      {{ /if }}
+    {{ else }}
+      Login to add gifs
+    {{ /if }}
+  </footer>
 </template>
