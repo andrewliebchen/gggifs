@@ -21,13 +21,10 @@ Meteor.methods({
   },
 
   addGif(args) {
-    return Meteor.users.update(args.userId, {
-      $push: {
-        'profile.gifs': {
-          data: args.data,
-          keywords: [args.keyword]
-        }
-      }
+    return Gifs.insert({
+      data: args.data,
+      keywords: [args.keyword],
+      parent_id: args.userId
     });
   },
 

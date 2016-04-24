@@ -1,5 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.publish('user', (id) => {
-  return Meteor.users.find({_id: id});
+Meteor.publish('user', (user) => {
+  return [
+    Meteor.users.find({_id: user.id}),
+    Gifs.find({parent_id: user.id})
+  ];
 });

@@ -38,6 +38,7 @@
 
 <template name="userGifs">
   <div class="gifs">
+    <h2>Your gifs</h2>
     {{ #each gif in gifs }}
       <div>
         {{> gifContent data=gif.data }}

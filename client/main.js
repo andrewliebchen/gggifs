@@ -26,7 +26,8 @@ Template.searchResults.helpers({
 
 Template.userGifs.helpers({
   gifs() {
-    return Meteor.users.findOne().profile.gifs;
+    console.log(Gifs.find({}).fetch());
+    return Gifs.find({});
   }
 });
 
@@ -34,7 +35,8 @@ Template.search.events({
   'keypress .mtr-gif-search'(event, instance) {
     const keyword = event.target.value;
     if(event.which === 13) {
-      FlowRouter.setQueryParams({search: keyword}); // How to run a query based on this?
+      // FlowRouter.setQueryParams({search: keyword});
+      FlowRouter.go('/');
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
           Session.set('results', {
@@ -55,6 +57,10 @@ Template.gifContent.events({
       data: this.data,
       keyword: instance.$('.mtr-gif-search').val(),
       userId: Meteor.userId()
+    }, (err, res) => {
+      if(res) {
+        console.log('Added!');
+      }
     });
   },
 
@@ -63,7 +69,9 @@ Template.gifContent.events({
       gifId: this.data.id,
       userId: Meteor.userId()
     }, (err, res) => {
-      console.log('Deleted!');
+      if(res) {
+        console.log('Deleted!');
+      }
     });
   }
 });
