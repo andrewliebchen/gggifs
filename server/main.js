@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import _ from 'lodash';
 import Giphy from 'giphy-api';
 
 const giphy = Giphy('dc6zaTOxFJmzC');
@@ -40,5 +41,10 @@ Meteor.methods({
         true
       }
     });
+  },
+
+  addKeyword(args) {
+    // FIXME: Got to get the right gif first
+    // Maybe its just easier to make a gifs collection at this point
   }
 });

@@ -14,6 +14,7 @@
   "description": "",
   "devDependencies": {
     "giphy-api": "^1.1.15",
+    "lodash": "^4.11.1",
     "slackbots": "^0.5.1"
   }
 }

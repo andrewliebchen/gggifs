@@ -41,9 +41,7 @@
     {{ #each gif in gifs }}
       <div>
         {{> gifContent data=gif.data }}
-        {{ #each keyword in gif.keywords }}
-          <div class="keyword">{{ keyword }}</div>
-        {{ /each }}
+        {{> keywords data=gif.keywords id=gif.data.id}}
       </div>
     {{ /each }}
   </div>
@@ -62,4 +60,11 @@
       Login to add gifs
     {{ /if }}
   </footer>
+</template>
+
+<template name="keywords">
+  {{ #each keyword in data }}
+    <div class="keyword">{{ keyword }}</div>
+  {{ /each }}
+  <input type="text" class="mtr-add-keyword"/>
 </template>

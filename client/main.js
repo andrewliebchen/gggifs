@@ -34,6 +34,7 @@ Template.search.events({
   'keypress .mtr-gif-search'(event, instance) {
     const keyword = event.target.value;
     if(event.which === 13) {
+      FlowRouter.setQueryParams({search: keyword}); // How to run a query based on this?
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
           Session.set('results', {
@@ -64,5 +65,20 @@ Template.gifContent.events({
     }, (err, res) => {
       console.log('Deleted!');
     });
+  }
+});
+
+Template.keywords.events({
+  'keypress .mtr-add-keyword'(event, instance) {
+    console.log(this.id);
+    if(event.which === 13) {
+      Meteor.call('addKeyword', {
+        gifId: this.id,
+        userId: Meteor.userId(),
+        keyword: event.target.value
+      }, (err, res) => {
+        console.log('Added!');
+      });
+    }
   }
 });
