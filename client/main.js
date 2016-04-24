@@ -35,8 +35,9 @@ Template.search.events({
   'keypress .mtr-gif-search'(event, instance) {
     const keyword = event.target.value;
     if(event.which === 13) {
-      // FlowRouter.setQueryParams({search: keyword});
       FlowRouter.go('/');
+      FlowRouter.setQueryParams({search: keyword});
+
       Meteor.call('getGifsByKeyword', keyword, (err, res) => {
         if(res){
           Session.set('results', {
@@ -55,7 +56,7 @@ Template.gifContent.events({
   'click .mtr-add-gif'(event, instance) {
     Meteor.call('addGif', {
       data: this.data,
-      keyword: instance.$('.mtr-gif-search').val(),
+      keyword: FlowRouter.getQueryParam('search'),
       userId: Meteor.userId()
     }, (err, res) => {
       if(res) {
@@ -64,11 +65,8 @@ Template.gifContent.events({
     });
   },
 
-  'click .mtr-remove-gif'(event, instance) {
-    Meteor.call('removeGif', {
-      gifId: this.data.id,
-      userId: Meteor.userId()
-    }, (err, res) => {
+  'click .mtr-remove-gif'() {
+    Meteor.call('removeGif', this.id, (err, res) => {
       if(res) {
         console.log('Deleted!');
       }
@@ -78,14 +76,12 @@ Template.gifContent.events({
 
 Template.keywords.events({
   'keypress .mtr-add-keyword'(event, instance) {
-    console.log(this.id);
     if(event.which === 13) {
       Meteor.call('addKeyword', {
-        gifId: this.id,
-        userId: Meteor.userId(),
+        id: this.id,
         keyword: event.target.value
       }, (err, res) => {
-        console.log('Added!');
+        event.target.value = '';
       });
     }
   }

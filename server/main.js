@@ -28,20 +28,15 @@ Meteor.methods({
     });
   },
 
-  removeGif(args) {
-    return Meteor.users.update(args.userId, {
-      $pull: {
-        'profile.gifs': {
-          'data.id': args.gifId
-        },
-        false,
-        true
-      }
-    });
+  removeGif(id) {
+    return Gifs.remove(id);
   },
 
   addKeyword(args) {
-    // FIXME: Got to get the right gif first
-    // Maybe its just easier to make a gifs collection at this point
+    return Gifs.update(args.id, {
+      $push: {
+        keywords: args.keyword
+      }
+    });
   }
 });

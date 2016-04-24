@@ -41,8 +41,8 @@
     <h2>Your gifs</h2>
     {{ #each gif in gifs }}
       <div>
-        {{> gifContent data=gif.data }}
-        {{> keywords data=gif.keywords id=gif.data.id}}
+        {{> gifContent data=gif.data id=gif._id }}
+        {{> keywords data=gif.keywords id=gif._id }}
       </div>
     {{ /each }}
   </div>
