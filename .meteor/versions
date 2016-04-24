@@ -4,7 +4,6 @@ accounts-ui@1.1.7
 accounts-ui-unstyled@1.1.10
 acemtp:accounts-slack@1.0.9
 allow-deny@1.0.2
-autopublish@1.0.5
 autoupdate@1.2.6
 babel-compiler@6.5.2
 babel-runtime@0.1.6

@@ -26,7 +26,7 @@ Template.searchResults.helpers({
 
 Template.userGifs.helpers({
   gifs() {
-    return Meteor.user().profile.gifs;
+    return Meteor.users.findOne().profile.gifs;
   }
 });
 
