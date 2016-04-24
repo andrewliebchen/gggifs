@@ -31,11 +31,10 @@ Meteor.methods({
   },
 
   removeGif(args) {
-    // FIXME: Does this work?
     return Meteor.users.update(args.userId, {
       $pull: {
         'profile.gifs': {
-          id: args.gifId
+          'data.id': args.gifId
         },
         false,
         true

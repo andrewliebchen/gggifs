@@ -52,25 +52,11 @@ Template.gifContent.events({
   },
 
   'click .mtr-remove-gif'(event, instance) {
-    // FIXME: It really needs it
     Meteor.call('removeGif', {
-      gifId: this.id,
+      gifId: this.data.id,
       userId: Meteor.userId()
     }, (err, res) => {
-      if(res) {
-        // Get the user collection again
-        const gifIds = _.pluck(Meteor.user().profile.gifs, 'id');
-        Meteor.call('getGifsByIds', gifIds, (err, res) => {
-          if(res) {
-            Session.set('results', {
-              title: 'Your gifs',
-              gifs: res
-            });
-          } else {
-            Meteor.Error(err);
-          }
-        });
-      }
+      console.log('Deleted!');
     });
   }
 });
