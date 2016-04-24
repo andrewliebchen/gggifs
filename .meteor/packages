@@ -23,3 +23,5 @@ acemtp:accounts-slack
 fourseven:scss
 standard-minifier-css
 mrt:normalize.css
+kadira:flow-router
+kadira:blaze-layout

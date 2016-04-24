@@ -6,6 +6,12 @@ import './main.html';
 
 Session.setDefault('results', null);
 
+Template.header.helpers({
+  currentUserId() {
+    return Meteor.userId();
+  }
+});
+
 Template.searchResults.helpers({
   resultsTitle() {
     let results = Session.get('results');

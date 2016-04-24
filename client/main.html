@@ -2,16 +2,27 @@
   <title>gggifs</title>
 </head>
 
-<body>
+<!-- <body>
   {{> header }}
   {{> search }}
   {{> searchResults }}
   {{> userGifs}}
-</body>
+</body> -->
+
+<template name="layout">
+  {{> header }}
+  {{> search }}
+  {{> Template.dynamic template=content }}
+</template>
+
+<template name="home">
+  {{> searchResults }}
+</template>
 
 <template name="header">
   <header>
     {{> loginButtons }}
+    <a href="/u/{{ currentUserId }}">Profile</a>
   </header>
 </template>
 
