@@ -1,12 +1,9 @@
-// Global API configuration
-var Api = new Restivus({
+const Api = new Restivus({
   useDefaultAuth: true,
   prettyJson: true,
   version: 'v1'
 });
 
-// Generates: POST on /api/users and GET, DELETE /api/users/:id for
-// Meteor.users collection
 Api.addCollection(Meteor.users, {
   excludedEndpoints: ['getAll', 'put', 'delete', 'post'],
   routeOptions: {
