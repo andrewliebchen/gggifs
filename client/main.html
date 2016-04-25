@@ -66,7 +66,12 @@
 
 <template name="keywords">
   {{ #each keyword in data }}
-    <div class="keyword">{{ keyword }}</div>
+    {{> singleKeyword data=keyword gifId=id }}
   {{ /each }}
   <input type="text" class="mtr-add-keyword"/>
+</template>
+
+
+<template name="singleKeyword">
+  <div class="keyword">{{ data }} <a class="mtr-remove-keyword">X</a></div>
 </template>

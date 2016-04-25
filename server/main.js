@@ -38,5 +38,13 @@ Meteor.methods({
         keywords: args.keyword
       }
     });
+  },
+
+  removeKeyword(args) {
+    return Gifs.update(args.id, {
+      $pull: {
+        keywords: args.keyword
+      }
+    });
   }
 });

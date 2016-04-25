@@ -26,7 +26,6 @@ Template.searchResults.helpers({
 
 Template.userGifs.helpers({
   gifs() {
-    console.log(Gifs.find({}).fetch());
     return Gifs.find({});
   }
 });
@@ -86,3 +85,14 @@ Template.keywords.events({
     }
   }
 });
+
+Template.singleKeyword.events({
+  'click .mtr-remove-keyword'(event, instance) {
+    Meteor.call('removeKeyword', {
+      id: this.gifId,
+      keyword: this.data
+    }, (err, res) => {
+      console.log('Keyword removed');
+    });
+  }
+})
