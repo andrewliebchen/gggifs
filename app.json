@@ -1,0 +1,15 @@
+{
+  "name": "gggifs",
+  "description": "Gifs are cool, right?",
+  "repository": "https://github.com/andrewliebchen/gggifs",
+  "keywords": ["meteor"],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/jordansissel/heroku-buildpack-meteor.git",
+    "ROOT_URL": {
+      "description": "Unless you have custom domain, it will be your Heroku app name + .herokuapp.com"
+    }
+  },
+  "addons": [
+    "mongolab"
+  ]
+}
