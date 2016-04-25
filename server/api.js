@@ -16,11 +16,11 @@ Api.addCollection(Meteor.users, {
     get: {
       authRequired: false,
       action: function() {
-        const userId = this.urlParams.id;
-        console.log(userId);
-        const keyword = this.queryParams.keyword;
-        const gif = Gifs.findOne({parent_id: userId, keywords: keyword});
-        console.log(gif);
+        const gif = Gifs.findOne({
+          parent_id: this.urlParams.id,
+          keywords: this.queryParams.keyword
+        });
+
         return { json: gif }
       }
     }
