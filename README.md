@@ -22,8 +22,8 @@ npm i
 meteor
 ```
 
-Visit http://localhost:3000
+Visit (http://localhost:3000)[http://localhost:3000].
 
 ## Deployment
 
-Heroku: https://gggifs.herokuapp.com
+Heroku: (https://gggifs.herokuapp.com)[https://gggifs.herokuapp.com].
