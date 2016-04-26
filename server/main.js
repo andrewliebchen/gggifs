@@ -21,9 +21,10 @@ Meteor.methods({
   },
 
   addGif(args) {
+    console.log(args.tag);
     return Gifs.insert({
       data: args.data,
-      keywords: [args.keyword],
+      tags: [args.tag],
       parent_id: args.userId
     });
   },
@@ -32,18 +33,18 @@ Meteor.methods({
     return Gifs.remove(id);
   },
 
-  addKeyword(args) {
+  addTag(args) {
     return Gifs.update(args.id, {
       $push: {
-        keywords: args.keyword
+        tags: args.tag
       }
     });
   },
 
-  removeKeyword(args) {
+  removeTag(args) {
     return Gifs.update(args.id, {
       $pull: {
-        keywords: args.keyword
+        tags: args.tag
       }
     });
   }

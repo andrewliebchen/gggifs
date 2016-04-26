@@ -31,7 +31,10 @@
     <h2>{{ resultsTitle }}</h2>
     <div>
       {{ #each result in results }}
-        {{> gifContent data=result add=true }}
+        <div>
+          <img src="{{ result.images.fixed_width.url }}"/>
+          {{> addGif data=result}}
+        </div>
       {{ /each }}
     </div>
   </div>
@@ -42,38 +45,39 @@
     <h2>Your gifs</h2>
     {{ #each gif in gifs }}
       <div>
-        {{> gifContent gif=gif }}
-        {{> keywords gif=gif }}
+        <img src="{{ gif.data.images.fixed_width.url }}"/>
+        {{ > removeGif gif=gif }}
+        {{> tags gif=gif }}
       </div>
     {{ /each }}
   </div>
 </template>
 
-<template name="gifContent">
-  <img src="{{ gif.data.images.fixed_width.url }}"/>
-  <footer>
-    {{ #if canEdit }}
-      {{ #if add }}
-        <button class="mtr-add-gif">Add</button>
-      {{ else }}
-        <button class="mtr-remove-gif">Delete gif</button>
-      {{ /if }}
-    {{ /if }}
-  </footer>
+<template name="addGif">
+  {{ #if currentUser }}
+    <button class="mtr-add-gif">Add</button>
+  {{ /if }}
 </template>
 
-<template name="keywords">
-  {{ #each keyword in gif.keywords }}
-    {{> singleKeyword data=keyword gifId=gif._id canEdit=canEdit }}
+<template name="removeGif">
+  {{ #if canEdit }}
+    <button class="mtr-remove-gif">Delete gif</button>
+  {{ /if }}
+</template>
+
+<template name="tags">
+  {{ #each tag in gif.tags }}
+    {{> singleTag data=tag id=gif._id canEdit=canEdit }}
   {{ /each }}
-  <input type="text" class="mtr-add-keyword"/>
+  <input type="text" class="mtr-add-tag"/>
 </template>
 
 
-<template name="singleKeyword">
-  <div class="keyword">{{ data }}
+<template name="singleTag">
+  <div class="tag">
+    {{ data }}
     {{ #if canEdit }}
-      <a class="mtr-remove-keyword">Remove</a>
+      <a class="mtr-remove-tag">Remove</a>
     {{ /if }}
   </div>
 </template>

@@ -34,15 +34,15 @@ Template.userGifs.helpers({
   }
 });
 
-Template.gifContent.helpers({
+Template.removeGif.helpers({
   canEdit() {
-    return canEdit(this.gif.parent_id);
+    return this.gif ? canEdit(this.gif.parent_id) : false;
   }
 });
 
-Template.keywords.helpers({
+Template.tags.helpers({
   canEdit() {
-    return canEdit(this.gif.parent_id);
+    return this.gif ? canEdit(this.gif.parent_id) : false;
   }
 });
 
@@ -67,11 +67,11 @@ Template.search.events({
   }
 });
 
-Template.gifContent.events({
+Template.addGif.events({
   'click .mtr-add-gif'(event, instance) {
     Meteor.call('addGif', {
       data: this.data,
-      keyword: FlowRouter.getQueryParam('search'),
+      tag: FlowRouter.getQueryParam('search'),
       userId: Meteor.userId()
     }, (err, res) => {
       if(res) {
@@ -79,22 +79,24 @@ Template.gifContent.events({
       }
     });
   },
+});
 
+Template.removeGif.events({
   'click .mtr-remove-gif'() {
-    Meteor.call('removeGif', this.id, (err, res) => {
+    Meteor.call('removeGif', this.gif._id, (err, res) => {
       if(res) {
         console.log('Deleted!');
       }
     });
   }
-});
+})
 
-Template.keywords.events({
-  'keypress .mtr-add-keyword'(event, instance) {
+Template.tags.events({
+  'keypress .mtr-add-tag'(event, instance) {
     if(event.which === 13) {
-      Meteor.call('addKeyword', {
-        id: this.id,
-        keyword: event.target.value
+      Meteor.call('addTag', {
+        id: this.gif._id,
+        tag: event.target.value
       }, (err, res) => {
         event.target.value = '';
       });
@@ -102,13 +104,13 @@ Template.keywords.events({
   }
 });
 
-Template.singleKeyword.events({
-  'click .mtr-remove-keyword'(event, instance) {
-    Meteor.call('removeKeyword', {
-      id: this.gifId,
-      keyword: this.data
+Template.singleTag.events({
+  'click .mtr-remove-tag'(event, instance) {
+    Meteor.call('removeTag', {
+      id: this.id,
+      tag: this.data
     }, (err, res) => {
-      console.log('Keyword removed');
+      console.log('Tag removed');
     });
   }
 })
