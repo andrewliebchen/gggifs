@@ -4,6 +4,10 @@ import { Template } from 'meteor/templating';
 
 import './main.html';
 
+const canEdit = (ownerId) => {
+  return ownerId === Meteor.userId();
+}
+
 Session.setDefault('results', null);
 
 Template.header.helpers({
@@ -27,6 +31,18 @@ Template.searchResults.helpers({
 Template.userGifs.helpers({
   gifs() {
     return Gifs.find({});
+  }
+});
+
+Template.gifContent.helpers({
+  canEdit() {
+    return canEdit(this.gif.parent_id);
+  }
+});
+
+Template.keywords.helpers({
+  canEdit() {
+    return canEdit(this.gif.parent_id);
   }
 });
 
