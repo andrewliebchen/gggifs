@@ -1,6 +1,30 @@
+$font-size-base: 16px;
+$line-height-base: 1.375rem;
+
+$max-width: 200px;
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+.wrapper {
+  width: $max-width;
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 1rem;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 a {

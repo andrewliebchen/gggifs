@@ -3,9 +3,11 @@
 </head>
 
 <template name="layout">
-  {{> header }}
-  {{> search }}
-  {{> Template.dynamic template=content }}
+  <div class="wrapper">
+    {{> header }}
+    {{> search }}
+    {{> Template.dynamic template=content }}
+  </div>
 </template>
 
 <template name="home">
