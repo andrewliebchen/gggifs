@@ -31,14 +31,12 @@
 <template name="searchResults">
   <div class="gifs">
     <h2>{{ resultsTitle }}</h2>
-    <div>
-      {{ #each result in results }}
-        <div>
-          <img src="{{ result.images.fixed_width.url }}"/>
-          {{> addGif data=result}}
-        </div>
-      {{ /each }}
-    </div>
+    {{ #each result in results }}
+      <div class="gif">
+        <img src="{{ result.images.fixed_width.url }}"/>
+        {{> addGif data=result}}
+      </div>
+    {{ /each }}
   </div>
 </template>
 
@@ -46,9 +44,11 @@
   <div class="gifs">
     <h2>Your gifs</h2>
     {{ #each gif in gifs }}
-      <div>
-        <img src="{{ gif.data.images.fixed_width.url }}"/>
-        {{ > removeGif gif=gif }}
+      <div class="gif">
+        <div class="gif-container">
+          <img src="{{ gif.data.images.fixed_width.url }}"/>
+          {{ > removeGif gif=gif }}
+        </div>
         {{> tags gif=gif }}
       </div>
     {{ /each }}
@@ -57,13 +57,13 @@
 
 <template name="addGif">
   {{ #if currentUser }}
-    <button class="mtr-add-gif">Add</button>
+    <button class="gif-action mtr-add-gif">+</button>
   {{ /if }}
 </template>
 
 <template name="removeGif">
   {{ #if canEdit }}
-    <button class="mtr-remove-gif">Delete gif</button>
+    <button class="gif-action mtr-remove-gif">-</button>
   {{ /if }}
 </template>
 

@@ -3,6 +3,8 @@ $line-height-base: 1.375rem;
 
 $max-width: 200px;
 
+$brand-primary: blue;
+
 * {
   box-sizing: border-box;
 }
@@ -17,18 +19,56 @@ body {
 .wrapper {
   width: $max-width;
   margin: 0 auto;
-  box-sizing: content-box;
-  padding: 1rem;
 }
 
 img {
   display: block;
   width: 100%;
   height: auto;
+  max-width: auto;
+  max-height: auto;
 }
 
 a {
-  color: blue;
+  color: $brand-primary;
   cursor: pointer;
   text-decoration: underline;
+}
+
+button {
+  $size: 2rem;
+  appearance: none;
+  background: none;
+  border: 0;
+  background-color: $brand-primary;
+  color: white;
+  line-height: $size;
+  height: $size;
+  min-width: $size;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.gifs {
+  // columns: 4;
+  // column-gap: 0;
+}
+
+.gif {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.gif-container {
+  position: relative;
+}
+
+.gif-action {
+  width: 2rem;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
