@@ -71,7 +71,7 @@
   {{ #each tag in gif.tags }}
     {{> singleTag data=tag id=gif._id canEdit=canEdit }}
   {{ /each }}
-  <input type="text" class="mtr-add-tag"/>
+  <input type="text" class="tag add-tag mtr-add-tag" placeholder="Add a tag"/>
 </template>
 
 
@@ -79,7 +79,7 @@
   <div class="tag">
     {{ data }}
     {{ #if canEdit }}
-      <a class="mtr-remove-tag">Remove</a>
+      <a class="mtr-remove-tag">x</a>
     {{ /if }}
   </div>
 </template>

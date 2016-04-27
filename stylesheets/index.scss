@@ -1,9 +1,39 @@
+// Colors
+$colors:
+#FFDC00,
+#FF851B,
+#FF4136,
+#F012BE,
+#B10DC9,
+#85144B;
+
+$aqua:  #7FDBFF;
+$blue:  #0074D9;
+$navy:  #001F3F;
+$teal:  #39CCCC;
+$green: #2ECC40;
+$olive: #3D9970;
+$lime:  #01FF70;
+
+$yellow:  #FFDC00;
+$orange:  #FF851B;
+$red:     #FF4136;
+$fuchsia: #F012BE;
+$purple:  #B10DC9;
+$maroon:  #85144B;
+
+$white:  #FFFFFF;
+$silver: #DDDDDD;
+$gray:   #AAAAAA;
+$black:  #333333;
+
+// App vars
 $font-size-base: 16px;
 $line-height-base: 1.375rem;
 
 $max-width: 200px;
 
-$brand-primary: blue;
+$brand-primary: $blue;
 
 * {
   box-sizing: border-box;
@@ -11,7 +41,7 @@ $brand-primary: blue;
 
 html,
 body {
-  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-family: "work sans", "helvetica neue", helvetica, arial, sans-serif;
   font-size: $font-size-base;
   line-height: $line-height-base;
 }
@@ -71,4 +101,27 @@ button {
   bottom: 0;
   right: 0;
   z-index: 1;
+}
+
+.tag {
+  line-height: 2rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@for $i from 1 through 6 {
+  .tag:nth-child(6n + #{$i + 1}) {
+    background-color: nth($colors, $i);
+  }
+}
+
+.add-tag {
+  border: 0;
+  width: 100%;
+
+  &::placeholder {
+    color: rgba(black, 0.5);
+  }
 }
