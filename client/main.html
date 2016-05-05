@@ -3,9 +3,11 @@
 </head>
 
 <template name="layout">
-  <div class="wrapper">
-    {{> header }}
-    {{> search }}
+  <div class="wrapper columns">
+    <div class="app-info">
+      {{> header }}
+      {{> search }}
+    </div>
     {{> Template.dynamic template=content }}
   </div>
 </template>
@@ -15,7 +17,7 @@
 </template>
 
 <template name="header">
-  <header>
+  <header class="header">
     <a href="/">Home</a>
     {{> loginButtons }}
     <a href="/u/{{ currentUserId }}">Profile</a>

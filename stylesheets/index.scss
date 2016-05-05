@@ -1,32 +1,3 @@
-// Colors
-$colors:
-#FFDC00,
-#FF851B,
-#FF4136,
-#F012BE,
-#B10DC9,
-#85144B;
-
-$aqua:  #7FDBFF;
-$blue:  #0074D9;
-$navy:  #001F3F;
-$teal:  #39CCCC;
-$green: #2ECC40;
-$olive: #3D9970;
-$lime:  #01FF70;
-
-$yellow:  #FFDC00;
-$orange:  #FF851B;
-$red:     #FF4136;
-$fuchsia: #F012BE;
-$purple:  #B10DC9;
-$maroon:  #85144B;
-
-$white:  #FFFFFF;
-$silver: #DDDDDD;
-$gray:   #AAAAAA;
-$black:  #333333;
-
 // App vars
 $font-size-base: 16px;
 $line-height-base: 1.375rem;
@@ -47,8 +18,8 @@ body {
 }
 
 .wrapper {
-  width: $max-width;
-  margin: 0 auto;
+  // width: $max-width;
+  // margin: 0 auto;
 }
 
 img {
@@ -80,14 +51,27 @@ button {
   padding: 0 1rem;
 }
 
+// .header,
+// .search {
+//   width: 100%;
+//   padding: 1rem;
+// }
+
+.columns {
+  columns: 5;
+  column-gap: 0;
+}
+
 .gifs {
-  // columns: 4;
-  // column-gap: 0;
+
+}
+
+.app-info {
+  padding: 1rem;
 }
 
 .gif {
-  position: relative;
-  margin-bottom: 1rem;
+  // width: 100vw;
 }
 
 .gif-container {
@@ -111,11 +95,11 @@ button {
   font-weight: 600;
 }
 
-@for $i from 1 through 6 {
-  .tag:nth-child(6n + #{$i + 1}) {
-    background-color: nth($colors, $i);
-  }
-}
+// @for $i from 1 through 6 {
+//   .tag:nth-child(6n + #{$i + 1}) {
+//     background-color: nth($colors, $i);
+//   }
+// }
 
 .add-tag {
   border: 0;
