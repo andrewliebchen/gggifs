@@ -4,7 +4,7 @@ $line-height-base: 1.375rem;
 
 $max-width: 200px;
 
-$brand-primary: $blue;
+$brand-primary: blue;
 
 * {
   box-sizing: border-box;
@@ -68,6 +68,7 @@ button {
 
 .app-info {
   padding: 1rem;
+  max-width: 20vw;
 }
 
 .gif {
