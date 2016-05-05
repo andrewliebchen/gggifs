@@ -36,7 +36,7 @@
     {{ #each result in results }}
       <div class="gif">
         <img src="{{ result.images.fixed_width.url }}"/>
-        {{> addGif data=result}}
+        {{> gifActions data=result}}
       </div>
     {{ /each }}
   </div>
@@ -54,6 +54,13 @@
         {{> tags gif=gif }}
       </div>
     {{ /each }}
+  </div>
+</template>
+
+<template name="gifActions">
+  <div class="gif-actions">
+    <button class="gif-action">V</button>
+    {{> addGif data=data }}
   </div>
 </template>
 

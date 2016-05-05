@@ -12,7 +12,7 @@ $brand-primary: blue;
 
 html,
 body {
-  font-family: "work sans", "helvetica neue", helvetica, arial, sans-serif;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
   font-size: $font-size-base;
   line-height: $line-height-base;
 }
@@ -58,7 +58,7 @@ button {
 // }
 
 .columns {
-  columns: 5;
+  columns: 3;
   column-gap: 0;
 }
 
@@ -73,19 +73,33 @@ button {
 
 .gif {
   // width: 100vw;
+  position: relative;
+  cursor: pointer;
 }
 
 .gif-container {
   position: relative;
 }
 
-.gif-action {
-  width: 2rem;
-  padding: 0;
+.gif-actions {
+  background-color: $brand-primary;
+  mix-blend-mode: screen;
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
-  z-index: 1;
+  left: 0;
+  bottom: 0;
+  display: none;
+  padding: 1rem;
+
+  .gif:hover & {
+    display: block;
+  }
+}
+
+.gif-action {
+  background-color: white;
+  color: $brand-primary;
 }
 
 .tag {
