@@ -27,3 +27,11 @@ Visit (http://localhost:3000)[http://localhost:3000].
 ## Deployment
 
 Heroku: (https://gggifs.herokuapp.com)[https://gggifs.herokuapp.com].
+
+## API
+
+Get a random gif saved and tagged by the specified user:
+
+```
+https://gggifs.herokuapp/com/api/v1/users/[USER ID]?tag=[tag]
+```

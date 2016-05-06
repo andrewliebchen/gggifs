@@ -15,17 +15,17 @@ Api.addCollection(Meteor.users, {
       action: function() {
         const id = this.urlParams.id;
 
-        const keyword = this.queryParams.keyword;
+        const tag = this.queryParams.tag;
         const gifs = Gifs.find({
           parent_id: id,
-          keywords: keyword
+          tags: tag
         }).fetch();
         const randomIndex = Math.floor( Math.random() * gifs.length );
         const randomGif = gifs[randomIndex];
-        
+
         const user = Meteor.users.findOne(id, {fields: {_id: 1, profile: 1}});
 
-        if(keyword) {
+        if(tag) {
           return { json: randomGif }
         } else {
           return { json: user };
