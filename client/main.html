@@ -51,7 +51,7 @@
         {{> removeGif gif=gif }}
         <div class="gif-meta">
           {{> tags gif=gif }}
-          {{> gifRanking }}
+          {{> gifRanking id=gif._id rank=gif.rank }}
         </div>
       </div>
     {{ /each }}
@@ -104,10 +104,7 @@
 
 <template name="gifRanking">
   <div class="gif-ranking">
-    <div class="gif-ranking-item">🌟</div>
-    <div class="gif-ranking-item">🌟</div>
-    <div class="gif-ranking-item">🌟</div>
-    <div class="gif-ranking-item">⭐️</div>
-    <div class="gif-ranking-item">⭐️</div>
+    {{ ranking }}
+      <!-- <div class="gif-ranking-item mtr-rank-toggle">🌟</div> -->
   </div>
 </template>

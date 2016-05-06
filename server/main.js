@@ -47,5 +47,13 @@ Meteor.methods({
         tags: args.tag
       }
     });
+  },
+
+  updateRank(args) {
+    return Gifs.update(args.id, {
+      $set: {
+        rank: args.rank
+      }
+    });
   }
 });
