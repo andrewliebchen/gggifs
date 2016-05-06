@@ -64,20 +64,20 @@
 
 <template name="gifActions">
   <div class="gif-actions">
-    <button class="gif-action">V</button>
+    <div class="gif-action">View</div>
     {{> addGif data=data }}
   </div>
 </template>
 
 <template name="addGif">
   {{ #if currentUser }}
-    <button class="gif-action mtr-add-gif">+</button>
+    <div class="gif-action mtr-add-gif">Add</div>
   {{ /if }}
 </template>
 
 <template name="removeGif">
   {{ #if canEdit }}
-    <button class="gif-action remove-gif mtr-remove-gif">-</button>
+    <button class="gif-action remove-gif mtr-remove-gif">Remove</button>
   {{ /if }}
 </template>
 

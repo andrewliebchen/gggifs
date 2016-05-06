@@ -92,21 +92,26 @@ button {
   background-color: $brand-primary;
   mix-blend-mode: screen;
   position: absolute;
-  top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  display: none;
+  display: flex;
   padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  transform: translateY(100%);
 
   .gif:hover & {
-    display: block;
+    transform: translateY(0);
   }
 }
 
 .gif-action {
-  background-color: white;
-  color: $brand-primary;
+  color: white;
+  line-height: 2rem;
+  cursor: pointer;
+  flex: 1;
 }
 
 .remove-gif {
@@ -123,6 +128,8 @@ button {
 .gif-meta {
   display: none;
   padding: 1rem;
+  position: absolute;
+  top: 100%;
 
   .gif:hover & {
     display: block;
