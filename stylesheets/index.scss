@@ -59,6 +59,7 @@ button {
   line-height: $header-height;
   z-index: 1;
   background-color: white;
+  padding: 0 1rem;
 }
 
 .search {
@@ -76,8 +77,20 @@ button {
   cursor: pointer;
 }
 
-.gif-container {
-  position: relative;
+.still-gif {
+  display: block;
+
+  .gif:hover & {
+    display: none;
+  }
+}
+
+.animated-gif {
+  display: none;
+
+  .gif:hover & {
+    display: block;
+  }
 }
 
 .gif-actions {
@@ -116,6 +129,7 @@ button {
   display: inline-block;
   border: 1px solid;
   padding: 0 0.25rem;
+  text-transform: uppercase;
 
   + .tag {
     margin-left: 0.25rem;

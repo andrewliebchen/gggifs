@@ -15,7 +15,7 @@
 
 <template name="header">
   <header class="header">
-    <a href="/">Home</a>
+    <a href="/">GGGIFS</a>
     {{> search }}
     {{> loginButtons }}
     <a href="/u/{{ currentUserId }}">Profile</a>
@@ -32,7 +32,9 @@
   <div class="gifs">
     {{ #each result in results }}
       <div class="gif">
-        <img src="{{ result.images.downsized_still.url }}"/>
+        {{> renderGif
+          still=result.images.downsized_still.url
+          animated=result.images.downsized.url }}
         {{> gifActions data=result}}
       </div>
     {{ /each }}
@@ -41,17 +43,23 @@
 
 <template name="userGifs">
   <div class="gifs">
-    <h2>Your gifs</h2>
     {{ #each gif in gifs }}
       <div class="gif">
-        <img src="{{ gif.data.images.downsized_still.url }}"/>
+        {{> renderGif
+          still=gif.data.images.downsized_still.url
+          animated=gif.data.images.downsized.url }}
         <div class="gif-meta">
-          {{ > removeGif gif=gif }}
+          {{> removeGif gif=gif }}
           {{> tags gif=gif }}
         </div>
       </div>
     {{ /each }}
   </div>
+</template>
+
+<template name="renderGif">
+  <img src="{{ still }}" class="still-gif"/>
+  <img src="{{ animated }}" class="animated-gif"/>
 </template>
 
 <template name="gifActions">
@@ -75,7 +83,10 @@
 
 <template name="tags">
   {{ #each tag in gif.tags }}
-    {{> singleTag data=tag id=gif._id canEdit=canEdit }}
+    {{> singleTag
+      data=tag
+      id=gif._id
+      canEdit=canEdit }}
   {{ /each }}
   <input type="text" class="tag add-tag mtr-add-tag" placeholder="Add a tag"/>
 </template>
