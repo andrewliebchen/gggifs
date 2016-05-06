@@ -41,12 +41,6 @@ Template.tags.helpers({
   }
 });
 
-Template.gifRanking.helpers({
-  ranking() {
-    return this.rank ? this.rank : 0
-  }
-})
-
 Template.search.events({
   'keypress .mtr-gif-search'(event, instance) {
     const keyword = event.target.value;
@@ -112,18 +106,6 @@ Template.singleTag.events({
       tag: this.data
     }, (err, res) => {
       console.log('Tag removed');
-    });
-  }
-});
-
-Template.gifRanking.events({
-  'click .mtr-rank-toggle'(event, instance) {
-    const clickedIndex = $(event.target).index();
-    Meteor.call('updateRank', {
-      id: this.id,
-      rank: clickedIndex
-    }, (err, res) => {
-      console.log('Rank updated');
     });
   }
 });
