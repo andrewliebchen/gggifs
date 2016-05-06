@@ -4,10 +4,7 @@
 
 <template name="layout">
   <div class="wrapper columns">
-    <div class="app-info">
-      {{> header }}
-      {{> search }}
-    </div>
+    {{> header }}
     {{> Template.dynamic template=content }}
   </div>
 </template>
@@ -19,6 +16,7 @@
 <template name="header">
   <header class="header">
     <a href="/">Home</a>
+    {{> search }}
     {{> loginButtons }}
     <a href="/u/{{ currentUserId }}">Profile</a>
   </header>
@@ -32,10 +30,9 @@
 
 <template name="searchResults">
   <div class="gifs">
-    <h2>{{ resultsTitle }}</h2>
     {{ #each result in results }}
       <div class="gif">
-        <img src="{{ result.images.fixed_width.url }}"/>
+        <img src="{{ result.images.downsized_still.url }}"/>
         {{> gifActions data=result}}
       </div>
     {{ /each }}
@@ -47,11 +44,11 @@
     <h2>Your gifs</h2>
     {{ #each gif in gifs }}
       <div class="gif">
-        <div class="gif-container">
-          <img src="{{ gif.data.images.fixed_width.url }}"/>
+        <img src="{{ gif.data.images.downsized_still.url }}"/>
+        <div class="gif-meta">
           {{ > removeGif gif=gif }}
+          {{> tags gif=gif }}
         </div>
-        {{> tags gif=gif }}
       </div>
     {{ /each }}
   </div>
@@ -85,10 +82,10 @@
 
 
 <template name="singleTag">
-  <div class="tag">
+  <span class="tag">
     {{ data }}
     {{ #if canEdit }}
-      <a class="mtr-remove-tag">x</a>
+      <span class="remove-tag mtr-remove-tag">x</span>
     {{ /if }}
-  </div>
+  </span>
 </template>

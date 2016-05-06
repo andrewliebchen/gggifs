@@ -1,8 +1,8 @@
 // App vars
 $font-size-base: 16px;
 $line-height-base: 1.375rem;
-
 $max-width: 200px;
+$header-height: 4rem;
 
 $brand-primary: blue;
 
@@ -26,8 +26,8 @@ img {
   display: block;
   width: 100%;
   height: auto;
-  max-width: auto;
-  max-height: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 a {
@@ -51,28 +51,27 @@ button {
   padding: 0 1rem;
 }
 
-// .header,
-// .search {
-//   width: 100%;
-//   padding: 1rem;
-// }
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  line-height: $header-height;
+  z-index: 1;
+  background-color: white;
+}
 
-.columns {
-  columns: 3;
-  column-gap: 0;
+.search {
+  display: inline-block;
 }
 
 .gifs {
-
-}
-
-.app-info {
-  padding: 1rem;
-  max-width: 20vw;
+  columns: 3;
+  column-gap: 0;
+  margin-top: $header-height;
 }
 
 .gif {
-  // width: 100vw;
   position: relative;
   cursor: pointer;
 }
@@ -102,25 +101,39 @@ button {
   color: $brand-primary;
 }
 
-.tag {
-  line-height: 2rem;
-  padding: 0 0.5rem;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 600;
+.gif-meta {
+  display: none;
+  padding: 1rem;
+
+  .gif:hover & {
+    display: block;
+  }
 }
 
-// @for $i from 1 through 6 {
-//   .tag:nth-child(6n + #{$i + 1}) {
-//     background-color: nth($colors, $i);
-//   }
-// }
+.tag {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid;
+  padding: 0 0.25rem;
 
-.add-tag {
-  border: 0;
-  width: 100%;
+  + .tag {
+    margin-left: 0.25rem;
+  }
+}
 
-  &::placeholder {
-    color: rgba(black, 0.5);
+.remove-tag {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  background-color: $brand-primary;
+  color: white;
+
+  .tag:hover & {
+    display: block;
   }
 }

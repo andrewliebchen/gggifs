@@ -17,11 +17,6 @@ Template.header.helpers({
 });
 
 Template.searchResults.helpers({
-  resultsTitle() {
-    let results = Session.get('results');
-    return results ? `Gifs matching ${results.title}` : false;
-  },
-
   results() {
     let results = Session.get('results');
     return results ? results.gifs.data : false;
