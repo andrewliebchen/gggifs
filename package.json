@@ -2,7 +2,8 @@
   "name": "gggifs",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0"
