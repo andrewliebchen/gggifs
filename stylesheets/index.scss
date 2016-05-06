@@ -17,11 +17,6 @@ body {
   line-height: $line-height-base;
 }
 
-.wrapper {
-  // width: $max-width;
-  // margin: 0 auto;
-}
-
 img {
   display: block;
   width: 100%;
@@ -114,6 +109,17 @@ button {
   color: $brand-primary;
 }
 
+.remove-gif {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+
+  .gif:hover & {
+    display: block;
+  }
+}
+
 .gif-meta {
   display: none;
   padding: 1rem;
@@ -150,4 +156,22 @@ button {
   .tag:hover & {
     display: block;
   }
+}
+
+.add-tag {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.gif-ranking {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.gif-ranking-item {
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+  font-size: 200%;
+
 }

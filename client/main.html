@@ -48,9 +48,10 @@
         {{> renderGif
           still=gif.data.images.downsized_still.url
           animated=gif.data.images.downsized.url }}
+        {{> removeGif gif=gif }}
         <div class="gif-meta">
-          {{> removeGif gif=gif }}
           {{> tags gif=gif }}
+          {{> gifRanking }}
         </div>
       </div>
     {{ /each }}
@@ -77,7 +78,7 @@
 
 <template name="removeGif">
   {{ #if canEdit }}
-    <button class="gif-action mtr-remove-gif">-</button>
+    <button class="gif-action remove-gif mtr-remove-gif">-</button>
   {{ /if }}
 </template>
 
@@ -99,4 +100,14 @@
       <span class="remove-tag mtr-remove-tag">x</span>
     {{ /if }}
   </span>
+</template>
+
+<template name="gifRanking">
+  <div class="gif-ranking">
+    <div class="gif-ranking-item">🌟</div>
+    <div class="gif-ranking-item">🌟</div>
+    <div class="gif-ranking-item">🌟</div>
+    <div class="gif-ranking-item">⭐️</div>
+    <div class="gif-ranking-item">⭐️</div>
+  </div>
 </template>
